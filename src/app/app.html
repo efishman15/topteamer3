@@ -1,0 +1,43 @@
+<ion-menu *ngIf="client.loaded" [content]="content" side="{{client.currentLanguage.align}}">
+
+  <ion-header>
+    <ion-toolbar color="light-blue">
+      <ion-title><div text-center>{{client.translate('TOOLS')}}</div></ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="app-bg" dir="{{client.currentLanguage.direction}}">
+
+    <ion-list no-lines>
+      <ion-item class="app-menu-item app-menu-button pointer" menuClose (click)="newContest()">
+        <ion-icon item-left name="add"></ion-icon>
+        <ion-label>{{client.translate('NEW_CONTEST')}}</ion-label>
+      </ion-item>
+      <ion-item class="app-menu-item app-menu-button pointer" menuClose (click)="share()">
+        <ion-icon item-left name="share-alt"></ion-icon>
+        {{client.translate('SHARE_WITH_FRIENDS_TITLE')}}
+      </ion-item>
+      <ion-item class="app-menu-item app-menu-button pointer" menuClose (click)="like()">
+        <ion-icon item-left name="thumbs-up"></ion-icon>
+        {{client.translate('LIKE')}}
+      </ion-item>
+      <ion-item class="app-menu-item app-menu-button pointer" menuClose (click)="settings()">
+        <ion-icon item-left name="settings"></ion-icon>
+        {{client.translate('SETTINGS')}}
+      </ion-item>
+      <ion-item class="app-menu-item app-menu-button pointer" *ngIf="client.session && client.session.isAdmin" menuClose (click)="systemTools()">
+        <ion-icon item-left name="hammer"></ion-icon>
+        {{client.translate('SYSTEM_TOOLS')}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- main navigation -->
+<ion-nav id="nav" [root]="root" #content swipeBackEnabled="false">
+</ion-nav>
+
+<loading-modal id="loading"></loading-modal>
+<player-info>
+</player-info>

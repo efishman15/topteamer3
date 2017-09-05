@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{client.translate('QUESTION_STATS_TITLE')}}
+    </ion-title>
+    <ion-buttons right>
+      <button (click)="dismiss(null)">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-bg">
+
+  <div padding-top padding-left padding-right text-center>
+
+    <div dir="{{question.direction}}">
+      <h5 class="center question-text" [innerHtml]="question.text"></h5>
+    </div>
+
+    <div *ngIf="question.correctRatio || question.correctRatio===0"
+         padding-top
+         padding-bottom
+         class="question-stats-wrapper animated zoomIn"
+         [ngStyle]="{'width': client.width * client.settings.charts.questionStats.size.widthRatio + 'px'}">
+      <canvas #questionStatsCanvas
+              class="question-chart">
+      </canvas>
+      <div class="question-chart-legend">
+        <ion-row>
+          <ion-col width-50>
+            <div
+                 class="question-chart-legned-item"
+                 [ngStyle]="{'background-color' : client.settings.charts.questionStats.colors.correct, 'float' : client.currentLanguage.oppositeAlign}">
+              {{client.translate('ANSWERED_CORRECT')}}<BR/>{{correctRatioRounded}}%
+            </div>
+          </ion-col>
+          <ion-col width-50>
+            <div
+                 class="question-chart-legned-item"
+                 [ngStyle]="{'background-color' : client.settings.charts.questionStats.colors.incorrect, 'float' : client.currentLanguage.align}">
+              {{client.translate('ANSWERED_INCORRECT')}}<BR/>{{100-correctRatioRounded}}%
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+    <div padding-top>
+      <button ion-button block *ngIf="question.wikipediaHint"
+              class="button-small app-button-light-blue"
+              (click)="dismiss('hint')">
+        {{ client.translate('HINT_FOR_SCORE',{score : question.hintCost}) }}
+      </button>
+    </div>
+    <div padding-top>
+      <button ion-button block *ngIf="question.wikipediaAnswer"
+              class="button-small app-button-light-purple"
+              (click)="dismiss('answer')">
+        {{ client.translate('ANSWER_FOR_SCORE',{score : question.answerCost}) }}
+      </button>
+    </div>
+
+  </div>
+
+</ion-content>
+

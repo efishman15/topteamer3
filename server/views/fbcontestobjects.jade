@@ -1,0 +1,14 @@
+doctype html
+html
+  head(prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# topteamer: http://ogp.me/ns/fb/topteamer#")
+    meta(property="fb:app_id" content="#{facebookObject['fb:app_id']}")
+    meta(property="og:type" content="#{facebookObject['og:type']}")
+    meta(property="og:title" content="#{facebookObject['og:title']}")
+    meta(property="og:description" content="#{facebookObject['og:description']}")
+    meta(property="og:url" content="#{facebookObject['og:url']}")
+    meta(property="og:image" content="#{facebookObject['og:image']}")
+    meta(property="og:image:width" content="#{facebookObject['og:image:width']}")
+    meta(property="og:image:height" content="#{facebookObject['og:image:height']}")
+body
+  script.
+    document.location.replace("#{facebookObject.redirectUrl}");

@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{client.translate('SETTINGS')}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="app-bg">
+  <ion-list *ngIf="client.session" inset class="no-horizontal-padding">
+    <ion-item class="app-menu-item no-horizontal-padding">
+      <ion-icon name="{{client.session.settings.sound ? 'volume-up' : 'volume-off'}}" item-left></ion-icon>
+      <ion-label>{{client.translate('GAME_SOUND')}}</ion-label>
+      <ion-toggle [(ngModel)]="client.session.settings.sound" (click)="toggleSettings('sound')"></ion-toggle>
+    </ion-item>
+    <ion-item no-lines class="app-menu-item no-horizontal-padding">
+      <ion-icon name="{{client.session.settings.notifications.on ? 'notifications' : 'notifications-off'}}"
+                item-left no-left-margin></ion-icon>
+      <ion-label>{{client.translate('NOTIFICATIONS')}}
+      </ion-label>
+      <ion-toggle [(ngModel)]="client.session.settings.notifications.on"
+                  (click)="toggleSettings('notifications.on')"></ion-toggle>
+    </ion-item>
+    <div class="settings-notifications-properties-{{client.currentLanguage.direction}}"
+         [ngClass]="{'settings-notifications-off': !client.session.settings.notifications.on}">
+      <ion-item no-lines class="app-menu-item no-horizontal-padding">
+        <ion-label>{{client.translate('SOUND')}}
+        </ion-label>
+        <ion-toggle [disabled]="!client.session.settings.notifications.on"
+                    [(ngModel)]="client.session.settings.notifications.sound"
+                    (click)="toggleSettings('notifications.sound',true)"></ion-toggle>
+      </ion-item>
+
+      <ion-item no-lines class="app-menu-item no-horizontal-padding">
+        <ion-label>{{client.translate('VIBRATE')}}
+        </ion-label>
+        <ion-toggle [disabled]="!client.session.settings.notifications.on"
+                    [(ngModel)]="client.session.settings.notifications.vibrate"
+                    (click)="toggleSettings('notifications.vibrate', true)"></ion-toggle>
+      </ion-item>
+
+      <ion-item no-lines class="app-menu-item no-horizontal-padding">
+        <ion-label>{{client.translate('ENDING_CONTESTS')}}</ion-label>
+        <ion-toggle [disabled]="!client.session.settings.notifications.on"
+                    [(ngModel)]="client.session.settings.notifications.endingContests"
+                    (click)="toggleSettings('notifications.endingContests')"></ion-toggle>
+      </ion-item>
+
+      <ion-item class="app-menu-item no-horizontal-padding">
+        <ion-label>{{client.translate('WHEN_MY_TEAM_LOSING')}}</ion-label>
+        <ion-toggle [disabled]="!client.session.settings.notifications.on"
+                    [(ngModel)]="client.session.settings.notifications.myTeamLosing"
+                    (click)="toggleSettings('notifications.myTeamLosing')"></ion-toggle>
+      </ion-item>
+    </div>
+
+    <ion-item class="app-menu-item no-horizontal-padding">
+      <ion-icon name="globe" item-left></ion-icon>
+      <ion-label class="base-font">{{client.translate('LANGUAGE')}}</ion-label>
+      <ion-select interface="action-sheet" multiple="false" [(ngModel)]="client.user.settings.language"
+                  okText="{{client.translate('OK')}}"
+                  cancelText="{{client.translate('CANCEL')}}"
+                  (ionChange)="switchLanguage()">
+        <ion-option *ngFor="let languageKey of client.languageKeys"
+                    value="{{languageKey}}"
+                    selected="languageKey===client.user.settings.language">
+          {{client.settings.languages[languageKey].displayNames[languageKey]}}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="app-menu-item no-horizontal-padding pointer" (click)="logout()">
+      <ion-icon name="log-out" item-left></ion-icon>
+      <ion-label>{{client.translate('SIGN_OUT')}}</ion-label>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,27 @@
+.set-user-avatars-wrapper {
+  margin-left: -22px;
+  margin-right: -22px;
+}
+
+.set-user-avatars-scroll-wrapper {
+  height: 60px;
+  background-color: transparent;
+}
+
+.set-user-avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.set-user-avatar-selected {
+  border: 1px solid #ffffff;
+}
+
+.set-user-avatar-not-selected {
+  border-radius: 50%;
+}
+
+.set-user-birthdate-note {
+  font-size: 12px;
+  color: #ffffff;
+}

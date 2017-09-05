@@ -1,0 +1,39 @@
+.simple-tabs-wrapper {
+  margin: 0px auto;
+  background-color: #2c2c52;
+}
+
+.active-tab {
+  background-color: #0288d8;
+  color: #f1f8fc;
+}
+
+.passive-tab {
+  background-color: #d9edf9;
+  color: #4d89af;
+}
+
+.simple-tab-border {
+  border-bottom: 5px solid #0288d8;
+}
+
+.simple-tab-common {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin: 0px auto;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.simple-tab-common-div {
+  height: 40px;
+  line-height: 40px;
+}
+
+.simple-tab-common-span {
+  font-weight: bold;
+  font-size: 17px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}

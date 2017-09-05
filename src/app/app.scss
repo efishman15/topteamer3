@@ -1,0 +1,164 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+.my-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.app-bg {
+  background-image: url('../assets/images/bg.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-color: transparent !important;
+}
+
+.app-menu-item {
+  background-color: transparent;
+  color: #ffffff !important;
+  font-weight: bold !important;
+}
+
+.base-font {
+  color: #ffffff !important;
+}
+
+.app-button-light-blue {
+  background-color: #61c2ec;
+  border: 1px solid #1c78a9;
+  border-radius: 15px;
+  box-shadow: 0 2px 0 0 #1c78a9;
+  color: #ffffff;
+  display: inline-block;
+  padding: 8px 20px;
+  font: normal 700 20px/1 "Roboto", "Helvetica Neue", sans-serif;
+  text-align: center;
+  text-shadow: 1px 1px 0 #1c78a9;
+}
+
+.app-button-light-purple {
+  background-color: #847fd9;
+  border: 1px solid #2c2c52;
+  border-radius: 15px;
+  box-shadow: 0 2px 0 0 #2c2c52;
+  color: #ffffff;
+  display: inline-block;
+  padding: 8px 20px;
+  font: normal 700 20px/1 "Roboto", "Helvetica Neue", sans-serif;
+  text-align: center;
+  text-shadow: 1px 1px 0 #2c2c52;
+}
+
+.select-text {
+  padding-left: 10px;
+}
+
+.app-menu-button {
+  font-size: 16px;
+}
+
+.app-smaller-title {
+  font-size: 18px !important;
+}
+
+.no-padding {
+  padding: 0px !important;
+}
+
+.no-margin {
+  margin: 0px auto !important;
+}
+
+.no-horizontal-padding {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.no-wrap-text {
+  overflow: visible !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.app-alert-ltr {
+  float: left;
+  text-align: left;
+  direction: ltr;
+}
+
+.app-alert-rtl {
+  float: right;
+  text-align: right;
+  direction: rtl;
+}
+
+.refresher-pulling-icon {
+  color: #ffffff;
+}
+
+.refresher-pulling-text {
+  color: #ffffff;
+}
+
+.app-link {
+  color: #00ffff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.action-sheet-title {
+  text-align: center !important;
+}
+
+.form-label {
+  font-size: 16px !important;
+  color: #ffffff !important;
+  background-color: transparent;
+}
+
+.date-picker-button {
+  font-size: 16px;
+  background-color: #847fd9;
+  border: 1px solid #2c2c52;
+  box-shadow: 0 2px 0 0 #2c2c52;
+  color: #ffffff;
+  display: inline-block;
+  padding: 8px 20px;
+  font: normal 700 20px/1 "Roboto", "Helvetica Neue", sans-serif;
+  text-align: center;
+  text-shadow: 1px 1px 0 #2c2c52;
+}
+
+.invalid-input {
+  color: #ffff00;
+  font-weight: bolder;
+}
+
+.button-facebook {
+  background-color: #4c7fea;
+  border: 1px solid #264da3;
+  border-radius: 15px;
+  box-shadow: 0 2px 0 0 #264da3;
+  color: #ffffff;
+  display: inline-block;
+  padding: 8px 20px;
+  font: normal 700 24px/1 "Calibri", sans-serif;
+  text-align: center;
+  text-shadow: 1px 1px 0 #264da3;
+}

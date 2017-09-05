@@ -1,0 +1,40 @@
+.player-info-wrapper-visible {
+  height: 5.6rem;
+}
+
+.player-info-wrapper-hidden {
+  display:none;
+}
+
+.player-info-row {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-left:5px;
+  padding-right:5px;
+}
+
+.player-info-ltr {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.player-info-rtl {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.player-info-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.player-info-canvas {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+}

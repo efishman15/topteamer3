@@ -1,0 +1,21 @@
+<div padding-top>
+
+</div>
+<ion-list>
+  <div class="leaders-item-wrapper no-vertical-padding" text-center *ngFor="let leader of leaders, let i=index">
+    <ion-row>
+      <ion-col width-10 class="no-padding">
+        <h1 class="leader-rank" [ngClass]="{'leader-rank-1': i===0, 'leader-rank-2': i===1, 'leader-rank-3': i===2, 'leader-rank-4-and-above': i>=3}" text-center>{{client.user.credentials.type === 'facebook' || mode !== 'friends' ? (i + 1) : '?' }}</h1>
+      </ion-col>
+      <ion-col width-90 class="no-padding">
+        <ion-item no-lines class="contest-leader-background">
+          <ion-avatar item-left>
+            <img src="{{client.getAvatarUrl(leader.avatar)}}">
+          </ion-avatar>
+          <h2 class="leader-row1">{{leader.name}}</h2>
+          <h3 class="leader-row2"><p>{{leader.score}} {{ client.translate('SCORE') }}</p></h3>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-list>

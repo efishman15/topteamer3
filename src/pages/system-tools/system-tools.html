@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{client.translate('SYSTEM_TOOLS')}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="app-bg">
+
+  <div padding>
+
+  </div>
+
+  <ion-item class="app-menu-item no-horizontal-padding">
+    <ion-label class="base-font">{{client.translate('ACTION')}}</ion-label>
+    <ion-select interface="action-sheet" multiple="false" [(ngModel)]="commandId"
+                okText="{{client.translate('OK')}}"
+                cancelText="{{client.translate('CANCEL')}}">
+      <ion-option *ngFor="let command of client.settings.admin.commands"
+                  value="{{command.id}}"
+                  selected="command.id===commandId">
+        {{client.translate(command.text)}}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+
+  <div text-center padding>
+    <button class="button-full app-button-light-purple" (click)="runCommand()">
+      {{client.translate('RUN')}}
+    </button>
+  </div>
+
+</ion-content>

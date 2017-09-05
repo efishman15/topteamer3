@@ -1,0 +1,92 @@
+.quiz-canvas-wrapper {
+  padding-top: 10px;
+  margin: 0px auto;
+}
+
+.question-text {
+  font-size: 20px;
+  color: #ffffff;
+  z-index: 1 !important;
+  transform: translateZ(0) !important;
+  -webkit-transform: translateZ(0) !important;
+  -moz-transform: translateZ(0) !important;
+  -o-transform: translateZ(0) !important;
+  -ms-transform: translateZ(0) !important;
+}
+
+.button.quiz-answer {
+  font-size: 18px;
+  white-space: normal;
+  height: 50px;
+  margin-bottom: 16px;
+  text-transform: none !important;
+}
+
+.blink {
+  -webkit-animation-name: blink;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: step-end;
+  -webkit-animation-iteration-count: 1;
+  animation-name: blink;
+  anmation-duration: 1s;
+  animation-timing-function: step-end;
+  animation-iteration-count: 1;
+}
+
+@-webkit-keyframes blink {
+  45% {
+    visibility: hidden
+  }
+  90% {
+    visibility: visible;
+  }
+}
+
+@keyframes blink {
+  45% {
+    visibility: hidden
+  }
+  90% {
+    visibility: visible;
+  }
+}
+
+.button-answer-default {
+  background-color: #333267 !important;
+  border: 2px solid #5f5c98 !important;
+  border-radius: 50px !important;
+  color: #ffffff !important;;
+  display: inline-block;
+  padding: 8px 20px !important;
+  text-align: center;
+}
+
+.button-answer-clicked {
+  background-color: #333267 !important;;
+  border: 2px solid #5f5c98 !important;;
+  border-radius: 50px !important;
+  color: #000000 !important;
+  display: inline-block;
+  padding: 8px 20px !important;
+  text-align: center;
+}
+
+.button-answer-correct {
+  background-color: #31bf81 !important;
+  border: 2px solid #0fe783 !important;
+  border-radius: 50px !important;
+  color: #000000 !important;
+  display: inline-block;
+  padding: 8px 20px !important;
+  text-align: center;
+}
+
+.button-answer-wrong {
+  background-color: #f35e4a !important;
+  border: 2px solid #f87765 !important;
+  border-radius: 50px !important;
+  color: #000000 !important;
+  display: inline-block;
+  padding: 8px 20px !important;
+  text-align: center;
+}

@@ -1,0 +1,125 @@
+.contest-chart-background {
+  border-color: #28a54c;
+  background-color: #ffe29b;
+  padding-bottom: 5px !important;
+}
+
+.button-join-contest {
+  font-size: 90%;
+  line-height: 1.2em;
+  white-space: normal;
+  height: 40px;
+}
+
+.contest-footer-text {
+  text-decoration: underline;
+  white-space: nowrap;
+  font-size: 12px;
+  color: #004d40;
+}
+
+.contest-animation-share-image {
+  position: absolute;
+  top: 6px;
+  font-size: 45px;
+}
+
+.long-animated {
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.button-top-leaders {
+  background: #a5b9f8;
+  background: -webkit-linear-gradient(#a5b9f8, #a7b9f9);
+  background: linear-gradient(#a5b9f8, #a7b9f9);
+  border-radius: 50px;
+  color: #000000;
+  display: inline-block;
+  text-align: center;
+  text-shadow: none;
+  font-weight: bold;
+  transform: translateY(50%);
+  -moz-transform: translateY(50%);
+  -webkit-transform: translateY(50%);
+  -ms-transform: translateY(50%);
+  -o-transform: translateY(50%);
+}
+
+.no-vertical-padding {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.contest-leader-area {
+  background-color: #38355d;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.transparent-background {
+  background-color: transparent;
+}
+
+.contest-leader-name {
+  font-size: 12px;
+  color: #83e8ff;
+}
+
+.contest-leader {
+  font-size: 12px !important;
+  font-weight: bolder !important;
+  color: #ffffff !important;
+}
+
+.contest-leader-more {
+  padding-top: 16px;
+}
+
+.contest-footer-button {
+  width: 18%;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.contest-footer-toolbar {
+  left: 0px;
+  height: 50px;
+}
+
+.contest-result-animation-wrapper {
+  margin-top: -75px;
+}
+
+.contest-result-animation {
+  border-radius: 15px;
+}
+
+.contest-result-animation .item-inner {
+  border-radius: 15px;
+  margin-right: -16px; //removes padding from ion-item
+  margin-left: -16px; //removes padding from ion-item
+}
+
+.contest-result-text1 {
+  font-size: 20px;
+  color: #d13f78;
+  font-weight: bolder !important;
+}
+
+.contest-result-text2 {
+  font-size: 15px;
+  color: #303030;
+}
+
+.contest-creator-wrapper {
+  padding-left: 10px;
+}
+
+.contest-leader-wrapper {
+  padding-left: 10px;
+}
+

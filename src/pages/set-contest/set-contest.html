@@ -1,0 +1,207 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{client.translate(params.data.mode === 'add' ? 'NEW_CONTEST' : 'EDIT_CONTEST')}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="app-bg">
+
+  <div padding *ngIf="client.session.features.newContest.locked">
+    <span class="feature-locked-text">{{client.translate('FEATURE_LOCKED_NEW_CONTEST', {rank : client.session.features.newContest.unlockRank}) }}</span>
+    <button class="button button-full button-small app-button-light-blue"
+            (click)="buyNewContestUnlockKey(false)" [disabled]="buyInProgress">
+      {{client.translate('UNLOCK_FEATURE', {formattedCost :
+      client.session.features.newContest.purchaseData.formattedCost}) }}
+    </button>
+    <button class="button button-full button-small app-button-light-purple"
+            *ngIf="client.user.clientInfo.platform ==='facebook' && client.session.features.newContest.purchaseData.mobilePricepointId"
+            (click)="buyNewContestUnlockKey(true)" [disabled]="buyInProgress">
+      {{client.translate('UNLOCK_FEATURE_MOBILE', {cost : client.session.features.newContest.purchaseData.cost, currency
+      : client.session.features.newContest.purchaseData.currencySymbol}) }}
+    </button>
+  </div>
+
+  <form [formGroup]="contestForm">
+
+    <div formGroupName="teams" padding-left padding-right padding-top>
+      <div class="set-contest-against" text-center>{{client.translate('AGAINST')}}</div>
+      <ion-row>
+        <ion-col width-50>
+          <ion-item>
+            <ion-input #team0Input
+                       name="team0"
+                       type="text"
+                       class="set-contest-team"
+                       formControlName="team0"
+                       (ionChange)="formChanged('team0')"
+                       placeholder="{{client.translate('TEAM0')}}"
+                       maxlength="{{this.client.settings.newContest.inputs.team.maxLength}}"
+                       autofocus>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col width-50>
+          <ion-item>
+            <ion-input #team1Input
+                       name="team1"
+                       type="text"
+                       class="set-contest-team"
+                       formControlName="team1"
+                       (ionChange)="formChanged('team1')"
+                       placeholder="{{client.translate('TEAM1')}}"
+                       maxlength="{{this.client.settings.newContest.inputs.team.maxLength}}">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div text-center
+               *ngIf="(contestForm.controls.teams.controls.team0.dirty || submitted) && contestForm.controls.teams.controls.team0.errors && contestForm.controls.teams.controls.team0.errors.required"
+               class="invalid-input">
+            {{client.translate('FIELD_REQUIRED')}}
+          </div>
+        </ion-col>
+        <ion-col>
+          <div text-center
+               *ngIf="(contestForm.controls.teams.dirty || submitted) && contestForm.controls.teams.errors && contestForm.controls.teams.errors.matchingTeams"
+               class="invalid-input">
+            {{client.translate('SERVER_ERROR_TEAMS_MUST_HAVE_DIFFERENT_NAMES_MESSAGE')}}
+          </div>
+        </ion-col>
+        <ion-col>
+          <div text-center
+               *ngIf="(contestForm.controls.teams.controls.team1.dirty || submitted) && contestForm.controls.teams.controls.team1.errors && contestForm.controls.teams.controls.team1.errors.required"
+               class="invalid-input">
+            {{client.translate('FIELD_REQUIRED')}}
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="set-contest-subject-wrapper">
+      <ion-item>
+        <ion-label stacked>{{client.translate('SUBJECT')}}</ion-label>
+        <ion-input #subjectInput
+                   name="subject"
+                   type="text"
+                   formControlName="subject"
+                   (ionChange)="formChanged('subject')"
+                   (ionFocus)="subjectFocus()"
+                   maxlength="{{this.client.settings.newContest.inputs.subject.maxLength}}"
+                   readonly="{{(this.contestLocalCopy.type.id === 'systemTrivia' && !this.client.session.isAdmin)}}"
+                   [attr.readonly]="contestLocalCopy.type.id==='systemTrivia' ? true : null">
+        </ion-input>
+      </ion-item>
+    </div>
+    <div text-center
+         *ngIf="(contestForm.controls.subject.dirty || submitted) && contestForm.controls.subject.errors && contestForm.controls.subject.errors.required"
+         class="invalid-input">
+      {{client.translate('FIELD_REQUIRED')}}
+    </div>
+
+    <div class="set-contest-ends-in-{{client.currentLanguage.direction}}" *ngIf="params.data.mode==='add'">
+      <ion-item no-lines class="transparent-background">
+        <ion-label class="base-font">{{client.translate('ENDS_IN')}}</ion-label>
+        <ion-select name="endOption"
+                    formControlame="endOption"
+                    interface="action-sheet"
+                    class="base-font"
+                    multiple="false"
+                    no-lines
+                   okText="{{client.translate('OK')}}"
+                    cancelText="{{client.translate('CANCEL')}}"
+                    (ionChange)="formChanged('endOption')">
+          <ion-option *ngFor="let endOptionKey of endOptionKeys"
+                      value="{{client.settings.newContest.endOptions[endOptionKey].value}}"
+                      selected="{{contestLocalCopy.endOption===client.settings.newContest.endOptions[endOptionKey].value}}">
+            {{client.translate(client.settings.newContest.endOptions[endOptionKey].units, {number:
+            client.settings.newContest.endOptions[endOptionKey].number}) }}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+    </div>
+    <div padding *ngIf="params.data.mode==='edit'">
+      <span class="form-label">{{client.translate('CONTEST_END')}}</span>
+      <date-picker [(currentDateEpoch)]="contestLocalCopy.endDate"
+                   [minDate]="contestLocalCopy.startDate"
+                   [maxDate]="getMaxEndDate()"
+                   [currentDateClass]="'date-picker-button'"
+                   (dateSelected)="endDateSelected($event)">
+      </date-picker>
+    </div>
+
+    <div padding-left padding-right *ngIf="contestLocalCopy.type.id === 'userTrivia'">
+      <ion-row>
+        <ion-col>
+          <div padding-top padding-bottom class="set-contest-user-questions-title">
+            {{client.translate('MY_CONTEST_QUESTIONS',{count : (contestLocalCopy.type.questions ?
+            contestLocalCopy.type.questions.visibleCount : 0)}) }}
+          </div>
+        </ion-col>
+        <ion-col>
+          <div [ngStyle]="{'float': client.currentLanguage.direction==='ltr' ? 'right' : 'left'}">
+            <button
+              (click)="openQuestionEditor('add')"
+              class="set-contest-question-buttons set-contest-add-question-button">
+              <ion-icon class="set-contest-add-icon" name="add-circle"></ion-icon>
+              {{client.translate('ADD')}}
+            </button>
+            <button
+              class="set-contest-question-buttons"
+              (click)="openSearchQuestions()"
+              title="{{client.translate('SEARCH')}}">
+              <ion-icon name="search"></ion-icon>
+            </button>
+          </div>
+        </ion-col>
+      </ion-row>
+      <div *ngIf="contestLocalCopy.type.questions && contestLocalCopy.type.questions.visibleCount > 0">
+        <ion-scroll class="set-contest-questions-scroll-{{client.currentLanguage.direction}}" scrollY="true"
+                    [ngStyle]="{'height': contestLocalCopy.type.questions.visibleCount >=5 ? '230px' : (contestLocalCopy.type.questions.visibleCount * 46) + 'px'}">
+          <ion-list class="set-contet-questions-list">
+            <ion-item
+              *ngFor="let question of contestLocalCopy.type.questions.list, let i=index"
+              [hidden]="question.deleted">
+              <ion-icon class="pointer" title="{{client.translate('REMOVE_QUESTION')}}" (click)="removeQuestion(i)"
+                        name="close-circle"
+                        item-right></ion-icon>
+              <span class="pointer" (click)="openQuestionEditor('edit', question)" [innerHtml]="question.text">
+              </span>
+            </ion-item>
+          </ion-list>
+        </ion-scroll>
+        <ion-item no-lines class="transparent-background set-contest-questions-random-order">
+          <ion-label class="base-font">{{client.translate('SHOW_IN_RANDOM_ORDER')}}
+          </ion-label>
+          <ion-checkbox color="light-purple"
+                        name="randomOrder"
+                        formControlName="randomOrder"
+                        (ionChange)="formChanged('randomOrder');">
+                        class="set-contest-random-order-checkbox-{{client.currentLanguage.direction}}">
+          </ion-checkbox>
+        </ion-item>
+      </div>
+    </div>
+
+    <div padding-left padding-right class="invalid-input"
+         *ngIf="submitted && contestLocalCopy.type.id === 'userTrivia' && userQuestionsInvalid">
+      {{userQuestionsInvalid}}
+    </div>
+
+    <div *ngIf="client.session.isAdmin" padding>
+      <button [disabled]="!contestLocalCopy.teams[0].name || !contestLocalCopy.teams[1].name" (click)="setAdminInfo()"
+              class="button-small app-button-light-purple">{{client.translate('CONTEST_ADMIN_INFO')}}
+      </button>
+    </div>
+
+    <div padding>
+      <button ion-button (click)="setContest()" class="app-button-light-blue" block>{{client.translate('OK')}}</button>
+    </div>
+  </form>
+
+</ion-content>
+                                                                            

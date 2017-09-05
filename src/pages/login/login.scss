@@ -1,0 +1,52 @@
+.game-header {
+  color: #ffffff;
+  font-weight: bolder;
+  padding-top: 20px;
+  font-size: 32px;
+}
+
+.game-sub-header {
+  color: #FFFFFF;
+}
+
+.bar-footer {
+  bottom: 0 !important;
+  position: absolute;
+  border-top-width: 1px;
+  border-bottom-width: 0;
+  background-position: top;
+  height: 20px;
+}
+
+
+.language {
+  color: #000000;
+  font-size: 80%;
+  cursor: pointer;
+  text-align: center;
+}
+
+.language:hover {
+  text-decoration: underline;
+}
+
+.facebook-relax-message {
+  font-size: 14px;
+}
+
+.button-guest {
+  background-color: #a9a9a9;
+  border: 1px solid #a2a2a2;
+  border-radius: 15px;
+  box-shadow: 0 2px 0 0 #828282;
+  color: #ffffff;
+  display: inline-block;
+  padding: 8px 20px;
+  font: normal 700 20px/1 "Calibri", sans-serif;
+  text-align: center;
+  text-shadow: 1px 1px 0 #828282;
+}
+
+.button-guest:hover:not(.disable-hover) {
+  background-color: #c3c3c3 !important;
+}

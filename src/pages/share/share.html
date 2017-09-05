@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{client.translate('SHARE_WITH_FRIENDS_TITLE')}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="app-bg">
+
+  <div class="base-font" padding text-center>
+    <h3 padding-top padding-bottom>{{title}}</h3>
+    <h5 padding *ngIf="params.data.contest">{{params.data.contest.name.long}}</h5>
+    <h5 padding *ngIf="!params.data.contest">{{client.translate('CONTEST_VIEW_TITLE')}}</h5>
+
+    <ion-list *ngIf="!client.user.clientInfo.mobile">
+      <div padding *ngFor="let row of client.settings.share.web.networks, let i=index">
+        <a class="share-button-padding pointer" *ngFor="let network of client.settings.share.web.networks[i]"
+           (click)="webShare(network)"
+           title="{{network.name}}">
+          <img src="{{network.image}}" width="{{client.settings.share.iconSize.width}}"
+               height="{{client.settings.share.iconSize.height}}">
+        </a>
+      </div>
+    </ion-list>
+
+    <div *ngIf="client.user.clientInfo.mobile">
+      <a class="share-button-padding" *ngFor="let app of client.shareApps" (click)="mobileShare(app.name)"
+         title="{{app.title}}" [hidden]="app.discover && !app.installed">
+        <img src="{{app.image}}" width="{{client.settings.share.iconSize.width}}"
+             height="{{client.settings.share.iconSize.height}}">
+      </a>
+      <div class="share-more-options">
+        <button class="button-small app-button-light-blue" (click)="mobileShare()">
+          {{client.translate('SHARE_OTHER_OPTIONS')}}
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

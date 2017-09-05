@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title *ngIf="contest">
+      {{client.translate('CONTEST_VIEW_TITLE')}}
+    </ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="client.openNewContest()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="app-bg" *ngIf="contest">
+
+  <contest-chart id="contest-{{contest._id}}"
+                 [(contest)]="contest"
+                 alternateButtonText="{{(contest.status === 'finished' ? client.translate('CONTEST_LEADERS') : (lastQuizResults ? client.translate('PLAY_FOR_TEAM_AGAIN',{'team': contest.teams[contest.myTeam].name}) : null)) }}"
+                 (contestSelected)="onContestSelected($event)"
+                 (myTeamSelected)="onMyTeamSelected($event)"
+                 (contestButtonClick)="onContestButtonClick($event)">
+  </contest-chart>
+
+  <div *ngIf="contestChartComponent">
+    <div text-center class="chart-bottom-area"
+         [ngStyle]="{'width': client.chartWidth + 'px'}">
+      <div *ngIf="lastQuizResults && lastQuizResults.data && animateLastResults > 0"
+           class="long-animated contest-result-animation-wrapper contest-chart-bottom-container {{animateLastResults === 1 ? lastQuizResults.data.animation : client.settings.quiz.finish.exitAnimation}}">
+        <ion-item class="contest-result-animation" [ngStyle]="{'text-align': client.currentLanguage.align}">
+          <div class="contest-result-text1">{{client.translate(lastQuizResults.data.clientKey + '_TITLE')}}</div>
+          <div class="contest-result-text2">{{client.translate(lastQuizResults.data.clientKey + '_MESSAGE',
+            lastQuizResults.data.clientValues) }}
+          </div>
+        </ion-item>
+      </div>
+
+      <div class="contest-leader-area">
+        <ion-row class="no-padding">
+          <ion-col width-80 class="no-padding">
+            <ion-item class="pointer transparent-background no-padding" no-lines (click)="showParticipants('leader')">
+              <ion-avatar item-left class="no-margin no-padding">
+                <img src="{{client.getAvatarUrl(contest.leader.avatar)}}">
+              </ion-avatar>
+              <div class="contest-leader-wrapper" [ngStyle]="{'text-align': client.currentLanguage.align}">
+                  <span class="no-wrap-text contest-leader-name">
+                    {{contest.leader.name}}
+                  </span>
+                <p class="contest-leader">{{client.translate('CONTEST_LEADER')}}
+                </p>
+              </div>
+            </ion-item>
+          </ion-col>
+          <ion-col width-20 class="contest-leader-more no-padding">
+            <button class="button-top-leaders button-small" (click)="showParticipants('topLeaders')"
+                    [ngStyle]="{'float': client.currentLanguage.oppositeAlign}">
+              {{client.translate('CONTEST_LEADERS_MORE')}}
+            </button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+    <button *ngIf="client.currentLanguage.direction==='ltr'" (click)="share('contestFab')">
+      <ion-icon name="share"></ion-icon>
+    </button>
+    <button *ngIf="client.currentLanguage.direction==='rtl'" (click)="share('contestFab')">
+      <ion-icon name="share"></ion-icon>
+    </button>
+  </div>
+
+</ion-content>

@@ -1,0 +1,111 @@
+<div text-center padding-top class="no-margin" [ngStyle]="{'width': client.chartWidth + 'px'}">
+  <div class="chart-top-ribbon">
+    <img src="assets/images/contest_top_{{client.currentLanguage.direction}}.png" class="chart-top-ribbon-image"
+         [ngStyle]="{'width': client.chartWidth + 'px'}">
+
+    <button (click)="onContestShareClick($event)"
+            class="chart-share chart-share-{{client.currentLanguage.direction}}"
+            title="{{client.translate('SHARE')}}">
+      <ion-icon name="share"></ion-icon>
+    </button>
+    <span class="chart-type-title chart-type-title-{{client.currentLanguage.direction}}"
+          [ngClass]="{'pointer': isOwner(), 'chart-type-title-link': isOwner()}"
+          (click)="isOwner() && onContestEdit($event)">
+      {{contest.subject}}
+    </span>
+    <span class="chart-end-time chart-end-time-{{client.currentLanguage.direction}}"
+          [ngClass]="{'contest-end-time-running': contest.status !== 'finished', 'contest-end-time-ended': contest.status === 'finished'}">{{contest.time.end.text}}</span>
+  </div>
+  <div class="chart pointer" (click)="onContestSelected($event,'chart')">
+    <ion-row>
+      <ion-col width-50>
+        <div
+          [ngStyle]="{'padding-top': client.settings.charts.contest.size.labelsPadding + 'px', 'padding-bottom': client.settings.charts.contest.size.labelsPadding + 'px'}">
+          <span (click)="teamSelected($event, 0,'teamName')"
+                class="contest-chart-team contest-chart-team0"
+                [ngClass]="{'contest-chart-team0-selected': contest.myTeam===0, 'contest-chart-team-not-selected': contest.myTeam!==0}">
+            {{contest.teams[0].name}}
+          </span>
+        </div>
+        <div class="long-animated {{animation}}">
+          <div (click)="teamSelected($event, 0,'teamBarComplementary')"
+               class="contest-chart-bar contest-chart-complementary-bar"
+               [ngStyle]="{'height': (client.chartHeight * client.settings.charts.contest.size.barPercentRatio * contest.teams[1].chartValue) + 'px'}">
+          </div>
+          <div (click)="teamSelected($event, 0,'teamBar')" class="contest-chart-bar contest-chart-team0-bar"
+               [ngStyle]="{'height': (client.chartHeight * client.settings.charts.contest.size.barPercentRatio * contest.teams[0].chartValue) + 'px', 'width': '50px'}">
+          </div>
+        </div>
+        <div class="contest-chart-team-percent-wrapper">
+          <span (click)="teamSelected($event, 0,'teamPercent')"
+                class="contest-chart-team-percent contest-chart-team0-percent">{{contest.teams[0].chartPercent}}%</span>
+        </div>
+      </ion-col>
+      <ion-col width-50>
+        <div
+          [ngStyle]="{'padding-top': client.settings.charts.contest.size.labelsPadding + 'px', 'padding-bottom': client.settings.charts.contest.size.labelsPadding + 'px'}">
+          <span (click)="teamSelected($event, 1,'teamName')"
+                class="contest-chart-team contest-chart-team1"
+                [ngClass]="{'contest-chart-team1-selected': contest.myTeam===1, 'contest-chart-team-not-selected': contest.myTeam!==1}">
+            {{contest.teams[1].name}}
+          </span>
+        </div>
+        <div class="long-animated {{animation}}">
+          <div (click)="teamSelected($event, 1,'teamBarComplementary')"
+               class="contest-chart-bar contest-chart-complementary-bar"
+               [ngStyle]="{'height': (client.chartHeight * client.settings.charts.contest.size.barPercentRatio * contest.teams[0].chartValue) + 'px'}">
+          </div>
+          <div (click)="teamSelected($event, 1,'teamBar')" class="contest-chart-bar contest-chart-team1-bar"
+               [ngStyle]="{'height': (client.chartHeight * client.settings.charts.contest.size.barPercentRatio * contest.teams[1].chartValue) + 'px'}">
+          </div>
+        </div>
+        <div class="contest-chart-team-percent-wrapper">
+          <span (click)="teamSelected($event, 1,'teamPercent')"
+                class="contest-chart-team-percent contest-chart-team1-percent">{{contest.teams[1].chartPercent}}%</span>
+        </div>
+      </ion-col>
+    </ion-row>
+    <div padding-bottom>
+      <button *ngIf="contest.status !== 'starting'"
+              class="button-play-contest no-wrap-text"
+              [ngClass]="{'button-play-contest-not-joined': contest.myTeam!==0 && contest.myTeam !==1, 'button-play-contest-team0': contest.myTeam===0, 'button-play-contest-team1': contest.myTeam===1}"
+              (click)="onContestButtonClick($event)">{{alternateButtonText ? alternateButtonText : contest.buttonText}}
+      </button>
+    </div>
+    <div text-center class="chart-bottom-line-separator">
+    </div>
+    <div class="contest-chart-bottom-container" (click)="onContestSelected($event, 'details')">
+      <ion-row class="no-padding">
+        <ion-col class="no-padding">
+          <ion-item no-lines class="no-padding">
+            <ion-avatar item-left class="no-padding no-margin">
+              <img src="{{client.getAvatarUrl(contest.creator.avatar)}}">
+            </ion-avatar>
+            <div class="contest-creator-wrapper" [ngStyle]="{'text-align': client.currentLanguage.align}">
+          <span class="no-wrap-text contest-users">
+              {{client.translate('CREATED_BY')}}
+              <span class="contest-creator">{{contest.creator.name}}</span>
+            </span>
+              <p class="contest-started">{{contest.time.start.text}}</p>
+            </div>
+          </ion-item>
+        </ion-col>
+        <ion-col width-5>
+        </ion-col>
+        <ion-col class="no-padding">
+          <div class="contest-participants-area"
+               [ngStyle]="{'float': client.currentLanguage.oppositeAlign}"
+               (click)="onContestParticipantsClick($event)">
+            <span [ngStyle]="{'float': client.currentLanguage.align}"
+                  class="contest-chart-bottom-ribbon-participants-text">
+            <span [ngStyle]="{'float': client.currentLanguage.align}"
+                  class="contest-chart-bottom-ribbon-participants-number">{{contest.participants}}
+            </span>
+            <br/>{{client.translate('PARTICIPANTS')}}
+            </span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</div>

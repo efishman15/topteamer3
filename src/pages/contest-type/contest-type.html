@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{client.translate('NEW_CONTEST')}}
+    </ion-title>
+
+    <ion-buttons right>
+      <button (click)="selectContestContent(null)">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-bg" dir="{{client.currentLanguage.direction}}">
+
+  <div class="choose-contest-type-title" text-center padding-top padding-bottom>
+    {{client.translate('SELECT_CONTEST_TYPE')}}
+  </div>
+
+  <div no-margin text-center>
+    <ion-row *ngFor="let row of client.settings.newContest.selectableContestTypes, let i=index">
+      <ion-col *ngFor="let contestTypeId of client.settings.newContest.selectableContestTypes[i]"
+               class="pointer"
+               (click)="selectContestContent(contestTypeId)">
+        <div class="contest-type-title"
+             [ngStyle]="{'color': client.settings.newContest.contestTypes[contestTypeId].text.titleColor}">
+          {{client.translate(client.settings.newContest.contestTypes[contestTypeId].text.title)}}
+        </div>
+        <img class="contest-type-image"
+             src="{{client.settings.newContest.contestTypes[contestTypeId].image.url}}">
+        <div class="contest-type-description" text-center>
+          {{client.translate(client.settings.newContest.contestTypes[contestTypeId].text.description)}}
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <div [innerHtml]="params.data.serverPopup.title"></div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-bg">
+
+  <div padding-top text-center class="base-font">
+    <img padding *ngIf="params.data.serverPopup.image" src={{params.data.serverPopup.image.url}} width="{{params.data.serverPopup.image.size.width}}" height="{{params.data.serverPopup.image.size.height}}">
+    <div padding [innerHtml]="params.data.serverPopup.message"></div>
+    <ion-buttons padding>
+      <button class="app-button-light-blue" *ngFor="let serverPopupButton of params.data.serverPopup.buttons" (click)="buttonAction(serverPopupButton)" [innerHtml]="serverPopupButton.text">
+      </button>
+    </ion-buttons>
+
+  </div>
+
+</ion-content>
+

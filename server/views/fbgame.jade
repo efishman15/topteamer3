@@ -1,0 +1,14 @@
+doctype html
+html
+    head(prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# topteamer: http://ogp.me/ns/fb/topteamer#")
+        meta(property="fb:app_id" content="#{appId}")
+        meta(property="og:type" content="game")
+        meta(property="og:title" content="#{title}")
+        meta(property="og:description" content="#{description}")
+        meta(property="og:url" content="http://www.topteamer.com/facebook/game/#{language}")
+        meta(property="og:image" content="http://www.topteamer.com/images/trophy.png")
+        meta(property="og:image:width" content="512")
+        meta(property="og:image:height" content="512")
+body
+  script.
+    document.location.replace("#{redirectUrl}");

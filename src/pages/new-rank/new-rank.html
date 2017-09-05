@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{client.translate('NEW_RANK_TITLE')}}
+    </ion-title>
+    <ion-buttons right>
+      <button (click)="dismiss(false)">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-bg">
+
+  <div padding text-center class="base-font">
+    <img padding src="assets/images/cup.png" width="250" height="250">
+
+    <h2 padding>{{client.translate('NEW_RANK_MESSAGE', {rank : client.session.rank}) }}</h2>
+    <h4 padding [hidden]="xpProgress.unlockFeatureMessage">{{client.translate(xpProgress.unlockFeatureMessage)}}</h4>
+
+    <button padding class="button-small app-button-light-blue" (click)="dismiss(true)">{{client.translate('OK')}}
+    </button>
+  </div>
+
+</ion-content>
+

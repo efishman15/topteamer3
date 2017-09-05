@@ -1,0 +1,37 @@
+<ion-content text-center class="app-bg" dir="{{client.currentLanguage.direction}}">
+
+  <div class="center">
+    <div class="game-header">{{client.translate('CONTEST_VIEW_TITLE')}}</div>
+    <h4 class="game-sub-header">{{client.translate('HOME_WELCOME')}}</h4>
+  </div>
+
+  <div padding text-center>
+    <img src="assets/images/cup.png" width="120" height="120">
+  </div>
+
+  <div padding-left padding-right padding-bottom>
+    <button ion-button block class="button-facebook" (click)="facebookLogin()">
+      {{client.translate('FACEBOOK_CONNECT')}}
+    </button>
+    <div text-center class="base-font facebook-relax-message">
+      {{client.translate('FACEBOOK_CONNECT_RELAX_MESSAGE')}}
+    </div>
+  </div>
+  <div *ngIf="client.settings.general.allowGuest" padding-left padding-right padding-top>
+    <button ion-button block class="button-guest" (click)="registerGuest()">
+      {{client.translate('GUEST_CONNECT')}}
+    </button>
+  </div>
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="bar-footer" dir="{{client.currentLanguage.direction}}">
+    <a padding
+       class="language"
+       *ngFor="let languageKey of client.languageKeys"
+       (click)="changeLanguage(languageKey)">{{client.settings.languages[languageKey].displayNames[client.settings.languages[languageKey].value]}}
+    </a>
+  </ion-toolbar>
+</ion-footer>

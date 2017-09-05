@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\hooks",
+    "\\hooks\\before_serve",
+    "\\src",
+    "\\src\\images"
+  ],
+  "SelectedNode": "\\hooks\\before_serve\\copyimages.js",
+  "PreviewInSolutionExplorer": false
+}

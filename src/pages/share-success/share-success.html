@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{client.translate(client.user.credentials.type === 'facebook' ? 'FACEBOOK_POST_TITLE' : 'SHARE_WITH_FRIENDS_TITLE')}}
+    </ion-title>
+    <ion-buttons left>
+      <button (click)="close('cancel')">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-bg" dir="{{client.currentLanguage.direction}}">
+
+  <div padding-top padding-left padding-right text-center>
+
+    <div padding-top class="long-animated {{quizResults.data.animation}}">
+      <div class="post-story-row-1">{{client.translate(quizResults.data.clientKey + '_TITLE')}}</div>
+      <div padding-top padding-bottom class="post-story-row-2">{{client.translate(quizResults.data.clientKey + '_MESSAGE', quizResults.data.clientValues) }}</div>
+    </div>
+
+    <img *ngIf="quizResults.data.facebookPost.dialogImage"
+         src="{{quizResults.data.facebookPost.dialogImage.url}}"
+         width="{{quizResults.data.facebookPost.dialogImage.width}}"
+         height="{{quizResults.data.facebookPost.dialogImage.height}}">
+
+    <div padding-top padding-bottom text-center>
+      <button ion-button block [ngClass]="{'button-facebook' : client.user.credentials.type === 'facebook','app-button-light-blue' : client.user.credentials.type !== 'facebook'}"
+              (click)="share()">{{client.translate(client.user.credentials.type === 'facebook' ? 'FACEBOOK_POST_TITLE' : 'SHARE_WITH_FRIENDS_TITLE')}}
+      </button>
+    </div>
+
+    <div padding-top text-center class="pointer button-not-now" (click)="close('cancel')">{{client.translate('NOT_NOW')}}
+    </div>
+
+  </div>
+
+</ion-content>

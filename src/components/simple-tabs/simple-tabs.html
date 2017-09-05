@@ -1,0 +1,16 @@
+<div padding-top text-center class="simple-tabs-wrapper">
+  <ion-row class="no-padding">
+    <ion-col width-5></ion-col>
+    <ion-col width-30 class="no-padding simple-tab-border" *ngFor="let simpleTab of simpleTabs" [class.active]="simpleTab.active">
+      <div class="simple-tab-common" (click)="selectTab(simpleTab)" [ngClass]="{'active-tab' : simpleTab.active, 'passive-tab' : !simpleTab.active}">
+        <div class="simple-tab-common-div">
+          <span class="simple-tab-common-span">
+            {{simpleTab.simpleTabTitle}}
+          </span>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col width-5>
+    </ion-col>
+  </ion-row>
+</div>

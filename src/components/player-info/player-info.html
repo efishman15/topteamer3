@@ -1,0 +1,13 @@
+<div [ngClass]="{'player-info-wrapper-visible': client && client.session,
+                  'player-info-ltr': client && client.session && client.currentLanguage.direction==='ltr',
+                  'player-info-rtl': client && client.session && client.currentLanguage.direction==='rtl',
+                  'player-info-wrapper-hidden': !client || !client.session}">
+  <div class="player-info-row">
+    <canvas #playerInfoCanvas width="40" height="40" class="player-info-canvas">
+    </canvas>
+    <img *ngIf="client && client.session" src="{{client.getAvatarUrl(client.session.avatar)}}"
+         class="player-info-avatar"
+         [ngClass]="{'pointer': client && client.user && client.user.credentials && client.user.credentials.type === 'guest'}"
+         (click)="client && client.user && client.user.credentials && client.user.credentials.type === 'guest' && myAvatarClick($event)">
+  </div>
+</div>
