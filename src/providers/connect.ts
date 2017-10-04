@@ -120,11 +120,11 @@ export let login = (permissions?, rerequestDeclinedPermissions?) => {
 }
 
 export let facebookLogin = () => {
-  return this.specificLogin(new ConnectInfo('facebook'));
+  return specificLogin(new ConnectInfo('facebook'));
 }
 
 export let guestLogin = () => {
-  return this.specificLogin(createGuest());
+  return pecificLogin(createGuest());
 }
 
 export let specificLogin = (connectInfo:ConnectInfo,
